@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/opendyslexic');
+    body {
+      font-family: 'OpenDyslexic', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .theme-btn {
+      width: 3em;
+      height: 3em;
+      padding: 0.5em;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+    }
+    .theme-btn img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 0;
+      text-align: center;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      height: auto;
+      z-index: 1000;
+    }
+
+    header img {
+      width: auto;
+      align-self: flex-start;
+      padding: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      display: inline-block;
+      padding: 15px 30px 15px 30px;
+      height: inherit;
+    }
+
+    header h1:hover {
+      background-color: rgba(255, 0, 0, 0.5);
+    }
+
+    #taskForm,
+    #taskList {
+      background-color: var(--color-heading);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #taskForm {
+      margin-right: 20px;
+    }
+
+    #taskList {
+      overflow-y: auto;
+      width: 240px;
+    }
+
+    .taskCard {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 10px;
+      width: 200px;
+      text-align: center;
+    }
+
+    .taskButtons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    body label, input, button {
+      margin-bottom: 10px;
+    }
+
+    :root,
+    :root.light {
+    --bg-color: #fff;
+    --text-color: #123456;
+    --color-heading: #;
+    }
+    :root.dark {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --color-heading: #dddddd;
+    }
+    :root.hidark {
+    --bg-color: #121212;
+    --text-color: #FF0;
+    --color-heading: #0FF;
+    }
+    :root.hilight {
+      --color-heading: #FF00FF;
+      --bg-color: #fff;
+      --text-color: #0000FF;
+    }
+    :root.lodark {
+      --bg-color: #121212;
+      --text-color: #666;
+      --color-heading: #888;
+    }
+    :root.lolight {
+      --bg-color: #fff;
+      --text-color: #AAA;
+      --color-heading: #777;
+    }
+    
+    .level-box {
+      padding: 20px;
+    }
+    
+    .level-bar {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .level-text {
+      margin-right: 10px;
+    }
+
+    .xp-bar {
+      width: 400px;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-right: 10px;
+    }
+
+    .xp-fill {
+      height: 100%;
+      background-color: #4caf50; /* Green color */
+      transition: width 0.5s; /* Smooth transition animation */
+    }
+
+    a {
+      color: #ffffff;
+    }
+  </style>
+</head>
+  <header>
+    <a href="/index.html"><img alt="scaramouche genshin impact" class="logo"
+      src="https://cdn.discordapp.com/attachments/1172411002814464040/1172436766947553300/Untitled_design-removebg-preview.png?ex=65604fd4&is=654ddad4&hm=f18cc2bbb1e1de67b0a4e4c57954833c0b713c53f798094ffdd805f2da08ee95&"
+      width="50" height="50" align="left"/></a>
+    <h1>To-Do List</h1>
+    <a href="/pomo.html"><h1>Pomodoro Timer</h1></a> 
+      <button class="theme-btn light" onclick="setTheme('light')" title="Light mode">
+        <img src="https://cdn.discordapp.com/attachments/1172411002814464040/1172672155331350628/image-removebg-preview.png?ex=65612b0d&is=654eb60d&hm=5f4012fc7353b24b7666db838a97beb50601e55fa5e2148151542ecb204d008c&" height="50" width="50" align="left">
+      </button>
+      <button class="theme-btn hilight" onclick="setTheme('hilight')" title="High contrast light mode">
+      <img src="https://cdn.discordapp.com/attachments/1172411002814464040/1172698580050522182/HI-removebg-preview.png?ex=656143a9&is=654ecea9&hm=4f4b1e68eb6fbdf0d5d758f13b23561eb8bbba8fb421f83f727da3d0ed38d6f7&" height="50" width="50" align="left">
+      </button>
+      <button class="theme-btn lolight" onclick="setTheme('lolight')" title="Low contrast light mode">
+      <img src="https://cdn.discordapp.com/attachments/1172411002814464040/1172698630122127461/HI__1_-removebg-preview.png?ex=656143b5&is=654eceb5&hm=541ff487f29e00dd932b275871165b1d7a5a5e8f0605c7da5a5370424bb675ec&" height="50" width="50" align="left">
+      </button>
+      <button class="theme-btn dark" onclick="setTheme('dark')" title="Dark mode">
+      <img src="https://cdn.discordapp.com/attachments/1172411002814464040/1172673799435591730/232750.png?ex=65612c95&is=654eb795&hm=6f4f5af9e1d65356693e440d764e2b360d2fc8520e4b2d01ba1c43cd70a7fad4&" height="50" width="50" align="left">
+      </button>
+      <button class="theme-btn hidark" onclick="setTheme('hidark')" title="High contrast dark mode">
+      <img src="https://cdn.discordapp.com/attachments/1172411002814464040/1172699140199817276/3-removebg-preview.png?ex=6561442e&is=654ecf2e&hm=ccee3b31d3a92fd0cc5c34043c6e3ff71d2cc75f3e70b91b0dba1cc0ab291548&" height="50" width="50" align="left">
+      </button>
+      <button class="theme-btn lodark" onclick="setTheme('lodark')" title="Low contrast dark mode">
+      <img src="https://cdn.discordapp.com/attachments/1172411002814464040/1172699168947589140/4-removebg-preview.png?ex=65614435&is=654ecf35&hm=d9c0e82f859cb91d19f3533e20cc548ce4dc7d7d8e7f92446d85eac3e89275ad&" height="50" width="50" align="left">
+      </button>
+    <!-- Add any additional header elements or buttons as needed -->
+    <div class = "level-box">
+    <div class="level-bar">
+        <span class="level-text">Level:</span>
+        <div id="levelIndicator">1</div>
+      </div>
+
+      <div class="xp-bar">
+        <div id="xpFill" class="xp-fill"></div>
+      </div>
+    </div>
+  </header>
+  <body>
+    <div id="taskForm">
+      <label for="datePicker">Date:</label>
+      <input type="date" id="datePicker">
+
+      <label for="taskName">Task Name:</label>
+      <input type="text" id="taskName" placeholder="Enter task name">
+
+      <label for="startTime">Start Time:</label>
+      <input type="time" id="startTime">
+
+      <label for="endTime">End Time:</label>
+      <input type="time" id="endTime">
+
+      <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <div id="taskList"></div>
+
+    <script>
+      //for theme changes
+      const setTheme = theme => document.documentElement.className = theme;
+
+      //ensure the two things are the same size
+        document.getElementById('taskList').style.height=document.getElementById('taskForm').getBoundingClientRect().height-40 + 'px';
+        //if its scuffed its bc 40 is hardcoded to the vertical padding value go change that
+
+      // Function to set a cookie
+      function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+      }
+
+      // Function to get a cookie value by name
+      function getCookie(name) {
+        const keyValue = document.cookie.match(`(^|;) ?${name}=([^;]*)(;|$)`);
+        return keyValue ? keyValue[2] : null;
+      }
+
+      // Load tasks and XP from cookies when the page loads
+      window.onload = function() {
+        const savedTasks = getCookie('tasks');
+        const savedXP = getCookie('XP') || 0;
+        const savedLevel = getCookie('level') || 1;
+
+        if (savedTasks) {
+          const taskList = document.getElementById('taskList');
+          taskList.innerHTML = savedTasks;
+
+          // Attach event listeners for deletion and completion
+          const taskCards = taskList.getElementsByClassName('taskCard');
+          for (const taskCard of taskCards) {
+            attachEventListeners(taskCard);
+          }
+        }
+
+        updateLevel(savedLevel);
+        updateXP(savedXP);
+      };
+
+      // Function to save tasks to cookies
+      function saveTasksToCookies() {
+        const taskList = document.getElementById('taskList');
+        setCookie('tasks', taskList.innerHTML, 7); // Store tasks for 7 days (adjust as needed)
+
+        // Attach event listeners for deletion and completion
+        const taskCards = taskList.getElementsByClassName('taskCard');
+        for (const taskCard of taskCards) {
+          attachEventListeners(taskCard);
+        }
+      }
+
+      // Function to update the level indicator
+      function updateLevel(level) {
+        document.getElementById('levelIndicator').innerText = level;
+        setCookie('level', level, 7); // Store level for 7 days (adjust as needed)
+      }
+
+      // Function to update the XP bar
+      function updateXP(xp) {
+        const xpPercentage = Math.min((xp / 100) * 100, 100);
+        document.getElementById('xpFill').style.width = `${xpPercentage}%`;
+      }
+
+      // Function to add XP to the XP cookie
+      function addXP(amount) {
+        const currentXP = parseInt(getCookie('XP')) || 0;
+        const newXP = currentXP + amount;
+        setCookie('XP', newXP, 7); // Store XP for 7 days (adjust as needed)
+
+        const xpToNextLevel = 100;
+        const currentLevel = parseInt(getCookie('level')) || 1;
+        if (newXP >= xpToNextLevel) {
+          const remainingXP = newXP - xpToNextLevel;
+          const newLevel = currentLevel + 1;
+          updateLevel(newLevel);
+          updateXP(remainingXP);
+        } else {
+          updateXP(newXP);
+        }
+      }
+
+      function addTask() {
+        const date = document.getElementById('datePicker').value;
+        const taskName = document.getElementById('taskName').value;
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
+
+        if (date && taskName && startTime && endTime) {
+          const taskList = document.getElementById('taskList');
+
+          const taskCard = document.createElement('div');
+          taskCard.className = 'taskCard';
+
+          const taskInfo = document.createElement('p');
+          taskInfo.textContent = `${taskName} | Due ${date}, from ${startTime} to ${endTime}`;
+
+          const taskButtons = document.createElement('div');
+          taskButtons.className = 'taskButtons';
+
+          const completeButton = document.createElement('button');
+          completeButton.textContent = 'Mark as Complete';
+          completeButton.onclick = function() {
+            markAsComplete(taskCard);
+          };
+
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.onclick = function() {
+            deleteTask(taskCard);
+          };
+
+          taskButtons.appendChild(completeButton);
+          taskButtons.appendChild(deleteButton);
+
+          taskCard.appendChild(taskInfo);
+          taskCard.appendChild(taskButtons);
+          taskList.appendChild(taskCard);
+
+          // Clear form inputs
+          document.getElementById('datePicker').value = '';
+          document.getElementById('taskName').value = '';
+          document.getElementById('startTime').value = '';
+          document.getElementById('endTime').value = '';
+          
+          document.getElementById('taskList').style.height=document.getElementById('taskForm').getBoundingClientRect().height-40 + 'px';
+        } else {
+          alert('Please fill in all fields.');
+        }
+        saveTasksToCookies();
+      }
+      function markAsComplete(taskCard) {
+        // Add your logic here for marking the task as complete
+        taskCard.remove(); // Change background color to indicate completion
+        addXP(5);
+        document.getElementById('taskList').style.height=document.getElementById('taskForm').getBoundingClientRect().height-40 + 'px';
+        saveTasksToCookies();
+      }
+
+      function deleteTask(taskCard) {
+        // Add your logic here for deleting the task
+        taskCard.remove();
+        document.getElementById('taskList').style.height=document.getElementById('taskForm').getBoundingClientRect().height-40 + 'px'; 
+        saveTasksToCookies();
+      }
+
+    </script>
+  </body>
+  </html>

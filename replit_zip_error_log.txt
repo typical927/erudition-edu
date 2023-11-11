@@ -1,0 +1,6 @@
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file erudition/node_modules/.bin/esbuild","time":"2023-11-11T04:48:54Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file erudition/node_modules/.bin/nanoid","time":"2023-11-11T04:48:54Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file erudition/node_modules/.bin/parser","time":"2023-11-11T04:48:54Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file erudition/node_modules/.bin/rollup","time":"2023-11-11T04:48:54Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file erudition/node_modules/.bin/syncfusion-license","time":"2023-11-11T04:48:54Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file erudition/node_modules/.bin/vite","time":"2023-11-11T04:48:54Z"}

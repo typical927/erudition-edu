@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+import WelcomeItem from './WelcomeItem.html'
+import DocumentationIcon from './icons/IconDocumentation.html'
+import ToolingIcon from './icons/IconTooling.html'
+import EcosystemIcon from './icons/IconEcosystem.html'
+import CommunityIcon from './icons/IconCommunity.html'
+import SupportIcon from './icons/IconSupport.html'
+</script>
+
+
+  <WelcomeItem>
+    <template #icon>
+      <DocumentationIcon />
+    </template>
+    <template #heading>Documentation</template>
+
+    Vue’s
+    <a target="_blank" href="https://vuejs.org/">official documentation</a>
+    provides you with all information you need to get started.
+  </WelcomeItem>
+
+  <WelcomeItem>
+    <template #icon>
+      <ToolingIcon />
+    </template>
+    <template #heading>Accessibility and Customization</template>
+    Erudition offers a dyslexia-friendly font, adjustable sizes, and visual aid options. Choose between high and low contrast modes for a personalized and comfortable experience.
+  </WelcomeItem>
+
+  <WelcomeItem>
+    <template #icon>
+      <EcosystemIcon />
+    </template>
+    <template #heading>Built-In Timetable</template>
+    A quick and easy timetable maker to organize tasks. Select timeslots and block them out on an easy-access calendar, all with a few clicks.
+  </WelcomeItem>
+
+  <WelcomeItem>
+    <template #icon>
+      <CommunityIcon />
+    </template>
+    <template #heading>Gamification</template>
+    Earn virtual and real life rewards for task completion and adherence to timelines, motivating users to increase productivity and manage their time better.
+  </WelcomeItem>
+
+  <WelcomeItem>
+    <template #icon>
+      <SupportIcon />
+    </template>
+    <template #heading>Time Management</template>
+    Stay focused with our customizable Pomodoro timers.
+  </WelcomeItem>
+</html>
